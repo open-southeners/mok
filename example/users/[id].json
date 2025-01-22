@@ -1,0 +1,5 @@
+{
+  "id": "{{.Data.id}}",
+  "email": "{{Email}}",
+  "address": "{{StreetName}}"
+}
