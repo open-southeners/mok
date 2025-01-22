@@ -1,4 +1,4 @@
-module example.com/mok
+module github.com/open-southeners/mok
 
 go 1.22.1
 
