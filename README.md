@@ -1,4 +1,4 @@
-Mok ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/open-southeners/mok) [![codecov](https://codecov.io/gh/open-southeners/mok/branch/main/graph/badge.svg?token=zx68fmehzI)](https://codecov.io/gh/open-southeners/mok) [![Edit on VSCode online](https://img.shields.io/badge/vscode-edit%20online-blue?logo=visualstudiocode)](https://vscode.dev/github/open-southeners/mok)
+Mok ![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/open-southeners/mok) [![codecov](https://codecov.io/gh/open-southeners/mok/branch/main/graph/badge.svg?token=JGU5oYvMXg)](https://codecov.io/gh/open-southeners/mok) [![Edit on VSCode online](https://img.shields.io/badge/vscode-edit%20online-blue?logo=visualstudiocode)](https://vscode.dev/github/open-southeners/mok)
 ===
 
 Mock APIs as files with a NextJS routing directory style
