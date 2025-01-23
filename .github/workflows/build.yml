@@ -42,7 +42,7 @@ jobs:
           echo "goarch=$GOARCH" >> $GITHUB_OUTPUT
 
       - name: 🏗 Build binary
-        run: go build -o "${{env.go-env.outputs.binary-name}}" -v
+        run: go build -o "${{steps.go-env.outputs.binary-name}}" -v
 
       - name: 🏗 Get release info
         id: query-release-info
@@ -59,4 +59,4 @@ jobs:
           # prerelease: true
           fail_on_unmatched_files: true
           preserve_order: true
-          files: ${{env.go-env.outputs.binary-name}}
+          files: ${{steps.go-env.outputs.binary-name}}
