@@ -37,12 +37,12 @@ jobs:
           GOOS=${GOOSARCH%/*}
           GOARCH=${GOOSARCH#*/}
           BINARY_NAME=${{github.repository}}-$GOOS-$GOARCH
-          echo "BINARY_NAME=$BINARY_NAME" >> $GITHUB_ENV
-          echo "GOOS=$GOOS" >> $GITHUB_ENV
-          echo "GOARCH=$GOARCH" >> $GITHUB_ENV
+          echo "binary-name=$BINARY_NAME" >> $GITHUB_OUTPUT
+          echo "goos=$GOOS" >> $GITHUB_OUTPUT
+          echo "goarch=$GOARCH" >> $GITHUB_OUTPUT
 
       - name: 🏗 Build binary
-        run: go build -o "${{env.go-env.outputs.BINARY_NAME}}" -v
+        run: go build -o "${{env.go-env.outputs.binary-name}}" -v
 
       - name: 🏗 Get release info
         id: query-release-info
@@ -57,4 +57,6 @@ jobs:
           body: ${{ steps.query-release-info.outputs.release-notes }}
           make_latest: contains(${{ needs.check.outputs.branch }}, 'main')
           # prerelease: true
-          files: ${{env.go-env.outputs.BINARY_NAME}}
+          fail_on_unmatched_files: true
+          preserve_order: true
+          files: ${{env.go-env.outputs.binary-name}}
