@@ -9,7 +9,30 @@ on:
       - "**"
 
 jobs:
+  # @see https://stackoverflow.com/a/72959712/8179249
+  check-current-branch:
+    runs-on: ubuntu-latest
+
+    outputs:
+      branch: ${{ steps.check_step.outputs.branch }}
+
+    steps:
+      - name: 🏗 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🏗 Get current branch
+        id: check_step
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch="$(echo ${raw//origin\//} | tr -d '\n')"
+          echo "{name}=branch" >> $GITHUB_OUTPUT
+          echo "Branches where this tag exists : $branch."
+
   build:
+    needs: check-current-branch
+
     strategy:
       matrix:
         # List of runners: https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories
@@ -43,12 +66,6 @@ jobs:
       - name: 🏗 Build binary
         run: go build -o "${{github.repository}}-${{matrix.runner.suffix}}" -v
 
-  release:
-    needs: build
-
-    runs-on: ubuntu-latest
-
-    steps:
       - name: 🏗 Get release info
         id: query-release-info
         uses: release-flow/keep-a-changelog-action@v3
